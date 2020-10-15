@@ -1,0 +1,13 @@
+[Unit]
+Description=Node Exporter for Prometheus
+Documentation=https://github.com/prometheus/node_exporter
+After=network-online.target
+
+[Service]
+EnvironmentFile=-/etc/node_exporter/default
+User=root
+Restart=on-failure
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart=/usr/local/bin/node_exporter $NODE_EXPORTER_OPTS
+[Install]
+WantedBy=multi-user.target

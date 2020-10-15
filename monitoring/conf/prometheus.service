@@ -1,0 +1,13 @@
+[Unit]
+Description=Prometheus Server
+Documentation=https://prometheus.io/docs/introduction/overview/
+After=network-online.target
+
+[Service]
+EnvironmentFile=-/etc/prometheus/default
+User=root
+Restart=on-failure
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart=/usr/local/bin/prometheus $PROMETHEUS_OPTS
+[Install]
+WantedBy=multi-user.target
